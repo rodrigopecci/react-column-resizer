@@ -3,7 +3,7 @@
 //https://github.com/nik-m2/react-column-resizer
 
 import React from 'react';
-import { bool, number, string } from 'prop-types';
+import { bool, number, string, func } from 'prop-types';
 
 export default class ColumnResizer extends React.Component {
 
@@ -52,6 +52,9 @@ export default class ColumnResizer extends React.Component {
         }
 
         this.dragging = false;
+
+        if (this.props.onEndDrag)
+          this.props.onEndDrag();
     }
 
     onMouseMove(e) {
@@ -156,10 +159,12 @@ ColumnResizer.defaultProps = {
     disabled: false,
     minWidth: 0,
     className: "",
+    onEndDrag: undefined,
 }
 
 ColumnResizer.propTypes = {
     disabled: bool,
     minWidth: number,
     className: string,
+    onEndDrag: func,
 }
